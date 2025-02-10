@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 services:
   mysql:
     image: mysql:8.0.34
@@ -23,8 +23,11 @@ services:
       - POSTGRES_PASSWORD=pass
 
   nodejs:
-    image: node:8
-    build: ./gate-simulator
+    image: node:16
+    container_name: gate_simulator
+    working_dir: /app
+    volumes:
+      - ./gate-simulator:/app
     ports:
-      - '9999:9999'
-    command: "npm start"
+      - "9999:9999"
+    command: npm start

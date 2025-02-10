@@ -21,5 +21,8 @@ Prerequisites
 1. Клонировать репозиторий командой git clone
 2. Запустить Docker
 3. Ввести в терминале команду docker compose up
-4. В другом терминале: cd gate-simulator, затем npm start
-5. Запустить веб-сервис в третьем терминале: java -jar ./artifacts/aqa-shop.jar
+4. Для запуска веб-сервиса с MySQL во втором терминале ввести команду: java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar ./artifacts/aqa-shop.jar
+Для запуска веб-сервиса с PostgreSQL использовать команду: java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar ./artifacts/aqa-shop.jar
+5. Чтобы запустить автотесты, в новом терминале ввести команду: .\gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app (для MySQL). 
+Для PostgreSQL: .\gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/app
+6. Для генерации отчетов в терминале ввести: .\gradlew allureServe
