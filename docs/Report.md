@@ -11,11 +11,12 @@
 <li>16 не прошли (34.78%)</li>
 </ul>
 
-![](docs/images/Allure report.jpg)
+![Allure report](https://github.com/user-attachments/assets/40d91224-7ca3-46c1-8b16-df00143d1466)
 
-![](docs/images/Allure done.jpg)
+![Allure done](https://github.com/user-attachments/assets/7fdf3c3c-7fa1-439c-902b-ca4bca29efee)
 
-![](docs/images/Allure.jpg)
+![Allure](https://github.com/user-attachments/assets/64bc8653-99f6-4606-a686-877f6e4f28fb)
+
 
 ### Общие рекомендации
 1. Добавить проверки поля "Владелец". Сейчас поле принимает любые введенные значения.
