@@ -11,9 +11,11 @@
 <li>16 не прошли (34.78%)</li>
 </ul>
 
-![Allure report.jpg](..%2F..%2F%D0%B4%D1%83%D1%80%D0%B0%2FAllure%20report.jpg)
-![Allure done.jpg](..%2F..%2F%D0%B4%D1%83%D1%80%D0%B0%2FAllure%20done.jpg)
-![Allure.jpg](..%2F..%2F%D0%B4%D1%83%D1%80%D0%B0%2FAllure.jpg)
+![](C:\Users\sveta\Desktop\Diploma_qa\docs\images\Allure%20report.jpg)
+
+![](C:\Users\sveta\Desktop\Diploma_qa\docs\images\Allure%20done.jpg)
+
+![](C:\Users\sveta\Desktop\Diploma_qa\docs\images\Allure.jpg)
 
 ### Общие рекомендации
 1. Добавить проверки поля "Владелец". Сейчас поле принимает любые введенные значения.
