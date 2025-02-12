@@ -127,7 +127,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getRandomCardNumber());
-        form.failureNotificationVisible(); // должен подсвечивать поле и выдавать сообщение "Неверный формат"
+        form.failureNotificationVisible();
     }
 
     @Test
@@ -327,7 +327,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getRandomCardNumber());
-        form.failureNotificationVisible(); // должен подсвечивать поле и выдавать сообщение "Неверный формат", заявка не должна отправляться
+        form.failureNotificationVisible();
     }
 
     @Test
