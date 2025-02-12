@@ -4,6 +4,7 @@ HELP.md
 .gradle
 build/
 data/
+images/
 
 ### STS ###
 .apt_generated
