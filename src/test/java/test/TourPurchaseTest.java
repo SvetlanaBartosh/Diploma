@@ -89,11 +89,11 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendEmptyForm();
-        form.checkFieldError(form.cardField, "Неверный формат");
-        form.checkFieldError(form.monthField, "Неверный формат");
-        form.checkFieldError(form.yearField, "Неверный формат");
-        form.checkFieldError(form.ownerField, "Поле обязательно для заполнения");
-        form.checkFieldError(form.cvvField, "Неверный формат");
+        form.cardFieldError("Неверный формат");
+        form.monthFieldError("Неверный формат");
+        form.yearFieldError("Неверный формат");
+        form.ownerFieldError("Поле обязательно для заполнения");
+        form.cvvFieldError("Неверный формат");
     }
 
     @Test
@@ -103,11 +103,11 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendEmptyForm();
-        form.checkFieldError(form.cardField, "Неверный формат");
-        form.checkFieldError(form.monthField, "Неверный формат");
-        form.checkFieldError(form.yearField, "Неверный формат");
-        form.checkFieldError(form.ownerField, "Поле обязательно для заполнения");
-        form.checkFieldError(form.cvvField, "Неверный формат");
+        form.cardFieldError("Неверный формат");
+        form.monthFieldError("Неверный формат");
+        form.yearFieldError("Неверный формат");
+        form.ownerFieldError("Поле обязательно для заполнения");
+        form.cvvFieldError("Неверный формат");
     }
 
     @Test
@@ -117,7 +117,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.get15CardNumber());
-        form.checkFieldError(form.cardField, "Неверный формат");
+        form.cardFieldError("Неверный формат");
     }
 
     @Test
@@ -127,8 +127,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getRandomCardNumber());
-        form.checkFieldError(form.cardField, "Неверный формат"); //должен подсвечивать поле и выдавать сообщение "Неверный формат"
-        form.failureNotificationVisible();
+        form.failureNotificationVisible(); // должен подсвечивать поле и выдавать сообщение "Неверный формат"
     }
 
     @Test
@@ -138,7 +137,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getEmptyCardNumber());
-        form.checkFieldError(form.cardField, "Неверный формат");
+        form.cardFieldError("Неверный формат");
     }
 
     @Test
@@ -148,7 +147,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getOneNumberOfMonth());
-        form.checkFieldError(form.monthField, "Неверный формат");
+        form.monthFieldError("Неверный формат");
     }
 
     @Test
@@ -158,7 +157,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getWrongMonth());
-        form.checkFieldError(form.monthField, "Неверно указан срок действия карты"); // АВТОТЕСТ ВЫДАЕТ ОШИБКУ,ФОРМА ОТПРАВЛЯЕТСЯ, НО В РУЧНОМ ТЕСТ. ПОЛЕ ПОДСВЕЧИВАЕТСЯ
+        form.monthFieldError("Неверно указан срок действия карты");  // форма отправляется, но поле месяц должно подсвечиваться с сообщением
     }
 
     @Test
@@ -168,7 +167,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getNonexistentMonth());
-        form.checkFieldError(form.monthField, "Неверно указан срок действия карты");
+        form.monthFieldError("Неверно указан срок действия карты");
     }
 
     @Test
@@ -178,7 +177,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getEmptyMonth());
-        form.checkFieldError(form.monthField, "Неверный формат");
+        form.monthFieldError("Неверный формат");
     }
 
     @Test
@@ -188,7 +187,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getExpiredYear());
-        form.checkFieldError(form.yearField, "Истёк срок действия карты");
+        form.yearFieldError("Истёк срок действия карты");
     }
 
     @Test
@@ -198,7 +197,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getWrongYear());
-        form.checkFieldError(form.yearField, "Неверно указан срок действия карты");
+        form.yearFieldError("Неверно указан срок действия карты");
     }
 
     @Test
@@ -208,7 +207,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getEmptyYear());
-        form.checkFieldError(form.yearField, "Неверный формат");
+        form.yearFieldError("Неверный формат");
     }
 
     @Test
@@ -218,7 +217,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getOneWordOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат");  // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -228,7 +227,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getOneLetterOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат");  // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -238,7 +237,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getCyrillicNameOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат");  // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -248,7 +247,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getNumberNameOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат");  // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -258,7 +257,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getSymbolNameOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат");  // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -268,7 +267,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getLowerCaseNameOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -278,7 +277,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getEmptyNameOwner());
-        form.checkFieldError(form.ownerField, "Поле обязательно для заполнения");
+        form.ownerFieldError("Поле обязательно для заполнения");
     }
 
     @Test
@@ -288,7 +287,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getOneNumberCvc());
-        form.checkFieldError(form.cvvField, "Неверный формат");
+        form.cvvFieldError("Неверный формат");
     }
 
     @Test
@@ -298,7 +297,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getTwoNumbersCvc());
-        form.checkFieldError(form.cvvField, "Неверный формат");
+        form.cvvFieldError("Неверный формат");
     }
 
     @Test
@@ -308,7 +307,7 @@ public class TourPurchaseTest {
         dashboardPage.goToPaymentPage();
         var form = new PaymentPage();
         form.sendForm(DataHelper.getEmptyCvc());
-        form.checkFieldError(form.cvvField, "Неверный формат");
+        form.cvvFieldError("Неверный формат");
     }
 
     @Test
@@ -318,7 +317,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.get15CardNumber());
-        form.checkFieldError(form.cardField, "Неверный формат");
+        form.cardFieldError("Неверный формат");
     }
 
     @Test
@@ -328,8 +327,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getRandomCardNumber());
-        form.checkFieldError(form.cardField, "Неверный формат"); //должен подсвечивать поле и выдавать сообщение "Неверный формат", заявка не должна отправляться
-        form.failureNotificationVisible();
+        form.failureNotificationVisible(); // должен подсвечивать поле и выдавать сообщение "Неверный формат", заявка не должна отправляться
     }
 
     @Test
@@ -339,7 +337,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getEmptyCardNumber());
-        form.checkFieldError(form.cardField, "Неверный формат");
+        form.cardFieldError("Неверный формат");
     }
 
     @Test
@@ -349,7 +347,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getOneNumberOfMonth());
-        form.checkFieldError(form.monthField, "Неверный формат");
+        form.monthFieldError("Неверный формат");
     }
 
     @Test
@@ -359,7 +357,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getWrongMonth());
-        form.checkFieldError(form.monthField, "Неверно указан срок действия карты"); // АВТОТЕСТ ВЫДАЕТ ОШИБКУ,ФОРМА ОТПРАВЛЯЕТСЯ, НО В РУЧНОМ ТЕСТ. ПОЛЕ ПОДСВЕЧИВАЕТСЯ
+        form.monthFieldError("Неверно указан срок действия карты");  // форма не должна отправляться, поле месяц должно подсвечиваться с сообщением
     }
 
     @Test
@@ -369,7 +367,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getNonexistentMonth());
-        form.checkFieldError(form.monthField, "Неверно указан срок действия карты");
+        form.monthFieldError("Неверно указан срок действия карты");
     }
 
     @Test
@@ -379,7 +377,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getEmptyMonth());
-        form.checkFieldError(form.monthField, "Неверный формат");
+        form.monthFieldError("Неверный формат");
     }
 
     @Test
@@ -389,7 +387,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getExpiredYear());
-        form.checkFieldError(form.yearField, "Истёк срок действия карты");
+        form.yearFieldError("Истёк срок действия карты");
     }
 
     @Test
@@ -399,7 +397,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getWrongYear());
-        form.checkFieldError(form.yearField, "Неверно указан срок действия карты");
+        form.yearFieldError("Неверно указан срок действия карты");
     }
 
     @Test
@@ -409,7 +407,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getEmptyYear());
-        form.checkFieldError(form.yearField, "Неверный формат");
+        form.yearFieldError("Неверный формат");
     }
 
     @Test
@@ -419,7 +417,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getOneWordOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -429,7 +427,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getOneLetterOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -439,7 +437,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getCyrillicNameOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -449,7 +447,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getNumberNameOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -459,7 +457,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getSymbolNameOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -469,7 +467,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getLowerCaseNameOwner());
-        form.checkFieldError(form.ownerField, "Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
+        form.ownerFieldError("Неверный формат"); // не должен отправлять заявку, под полем владец должно быть сообщение Неверный формат
     }
 
     @Test
@@ -479,7 +477,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getEmptyNameOwner());
-        form.checkFieldError(form.ownerField, "Поле обязательно для заполнения");
+        form.ownerFieldError("Поле обязательно для заполнения");
     }
 
     @Test
@@ -489,7 +487,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getOneNumberCvc());
-        form.checkFieldError(form.cvvField, "Неверный формат");
+        form.cvvFieldError("Неверный формат");
     }
 
     @Test
@@ -499,7 +497,7 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getTwoNumbersCvc());
-        form.checkFieldError(form.cvvField, "Неверный формат");
+        form.cvvFieldError("Неверный формат");
     }
 
     @Test
@@ -509,6 +507,6 @@ public class TourPurchaseTest {
         dashboardPage.goToCreditPage();
         var form = new CreditPage();
         form.sendForm(DataHelper.getEmptyCvc());
-        form.checkFieldError(form.cvvField, "Неверный формат");
+        form.cvvFieldError("Неверный формат");
     }
 }

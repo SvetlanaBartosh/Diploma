@@ -7,6 +7,7 @@ import data.DataHelper;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -21,11 +22,11 @@ public class CreditPage {
     private SelenideElement successNotification = $(byText("Операция одобрена Банком."));
     private SelenideElement failureNotification = $(byText("Ошибка! Банк отказал в проведении операции."));
 
-    public SelenideElement cardField = $(byText("Номер карты")).parent().$(".input__sub");
-    public SelenideElement monthField = $(byText("Месяц")).parent().$(".input__sub");
-    public SelenideElement yearField = $(byText("Год")).parent().$(".input__sub");
-    public SelenideElement ownerField = $(byText("Владелец")).parent().$(".input__sub");
-    public SelenideElement cvvField = $(byText("CVC/CVV")).parent().$(".input__sub");
+    private SelenideElement cardField = $(byText("Номер карты")).parent().$(".input__sub");
+    private SelenideElement monthField = $(byText("Месяц")).parent().$(".input__sub");
+    private SelenideElement yearField = $(byText("Год")).parent().$(".input__sub");
+    private SelenideElement ownerField = $(byText("Владелец")).parent().$(".input__sub");
+    private SelenideElement cvvField = $(byText("CVC/CVV")).parent().$(".input__sub");
 
     public void sendForm(DataHelper.CardInfo cardInfo) {
         cardNumber.setValue(cardInfo.getCardNumber());
@@ -41,14 +42,35 @@ public class CreditPage {
     }
 
     public void successNotificationVisible() {
-        successNotification.shouldBe(Condition.visible, Duration.ofSeconds(15));
+        successNotification.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public void failureNotificationVisible() {
-        failureNotification.shouldBe(Condition.visible);
+        failureNotification.shouldBe(visible);
     }
 
     public void checkFieldError(SelenideElement field, String expectedErrorText) {
+        field.shouldBe(visible);
         field.shouldHave(text(expectedErrorText));
+    }
+
+    public void cardFieldError(String expectedErrorText) {
+        checkFieldError(cardField, expectedErrorText);
+    }
+
+    public void monthFieldError(String expectedErrorText) {
+        checkFieldError(monthField, expectedErrorText);
+    }
+
+    public void yearFieldError(String expectedErrorText) {
+        checkFieldError(yearField, expectedErrorText);
+    }
+
+    public void ownerFieldError(String expectedErrorText) {
+        checkFieldError(ownerField, expectedErrorText);
+    }
+
+    public void cvvFieldError(String expectedErrorText) {
+        checkFieldError(cvvField, expectedErrorText);
     }
 }

@@ -20,14 +20,14 @@ public class SQLHelper {
 
     @SneakyThrows
     public static String getPaymentStatus() {
-        String statusSQL = "SELECT status FROM payment_entity";
+        String statusSQL = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
         var conn = getConn();
         return QUERY_RUNNER.query(conn, statusSQL, new ScalarHandler<>());
     }
 
     @SneakyThrows
     public static String getCreditStatus() {
-        String statusSQL = "SELECT status FROM credit_request_entity";
+        String statusSQL = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
         var conn = getConn();
         return QUERY_RUNNER.query(conn, statusSQL, new ScalarHandler<>());
     }
